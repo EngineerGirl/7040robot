@@ -373,7 +373,7 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
         // AFTER you hit Init on the Driver Station, use the "options menu" to select "Camera Stream"
         // Tap the preview window to receive a fresh image.
         
-        moveRobot(-0.5, 0.5, 0.5, -0.5, 2000);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2000);
 
         targetsSkyStone.activate();
         while (!isStopRequested()) {
@@ -418,16 +418,17 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
         }
         
         //Block detected, move a little bit to the left to account for camera position
-        moveRobot(0.5, 0.5, 0.5, 0.5, 150);
-        moveRobot(-0.5, 0.5, 0.5, -0.5, 2000); //Strafe forward to position for grabbing block
+        moveRobot(0.5, 0.5, 0.5, 0.5, 200);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2000); //Strafe forward to position for grabbing block
 
         armDown();
-        
-        moveRobot(0.5, -0.5, -0.5, 0.5, 900);
+        //move right to not hit bridge
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 900);
+        //go to other side
         moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration);
-
+        //drop block
         armUp();
-
+        //go back
         moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration/2);
        
         // Disable Tracking when we are done;
