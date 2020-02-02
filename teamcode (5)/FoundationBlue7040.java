@@ -149,12 +149,17 @@ public class FoundationBlue7040 extends LinearOpMode {
             
             //move back
             foundation.setPosition(0.1);
-            moveRobot(-0.65, -0.65, -0.65, -0.65, 1850);
+            moveRobot(-0.65, -0.65, -0.65, -0.65, 1950);
             
-            /*//turn to the RIGHT
+            //turn to the RIGHT
             foundation.setPosition(0.1);
-            moveRobot(0.3, -0.3, 0.3, -0.3, 1500);*/
+            moveRobot(-0.3, 0.3, -0.3, 0.3, 1500);
 
+            //strafe right
+            moveRobot(1.0, -1.0, -1.0, 1.0, 500);
+            
+            //tur IllegalThreadStateException
+            moveRobot(-0.3, 0.3, -0.3, 0.3, 3000);
             /*//move forward to position the foundation in the corner
             moveRobot(0.52, 0.58, 0.52, 0.58, 1000);
             stopRobot(1000);        */   

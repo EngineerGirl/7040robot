@@ -193,10 +193,10 @@ public class OpMode7040 extends LinearOpMode {
             rightFront.setPower(fRightPower);
             rightBack.setPower(bRightPower);
             if (gamepad2.right_stick_y<0){
-                liftMotor.setPower(liftPower*2);
+                liftMotor.setPower(-liftPower*2);
             }
             else if (gamepad2.right_stick_y>0){
-                liftMotor.setPower(liftPower*0.5);
+                liftMotor.setPower(-liftPower*0.5);
             }
             else{
                 liftMotor.setPower(liftPower);
