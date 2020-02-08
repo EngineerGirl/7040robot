@@ -378,8 +378,9 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
         targetsSkyStone.activate();
         while (!isStopRequested()) {
             if(!targetVisible){
-                moveRobot(0.5, 0.5, 0.5, 0.5, 500);
-                detectDuration+=2500;
+                //moveRobot(-0.5, -0.5, -0.5, -0.5, 500);
+                //detectDuration+=2500;
+                //iterations++;
             }
         
             // check all the trackable targets to see which one (if any) is visible.
@@ -397,6 +398,8 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
                     }
                     break;
                 }
+                
+            
             }
 
             // Provide feedback as to where the robot is located (if we know).
@@ -412,25 +415,90 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
                 break;
             }
             else {
+                if(iterations==0){
+                    break;
+                }
                 telemetry.addData("Visible Target", "none");
+                moveRobot(-0.5, -0.5, -0.5, -0.5, 500);
+                detectDuration+=2500;
+                iterations++;
             }
             telemetry.update();
         }
-        
+        switch(iterations){
+        case 1:{
+        //Block detected, move a little bit to the left to account for camera position
+        moveRobot(-0.5, -0.5, -0.5, -0.5, 0);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2000); //Strafe forward to position for grabbing block
+
+        armDown();
+        //move right to not hit bridge
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2000);
+        //go to other side
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration);
+        //drop block
+        armUp();
+        //go back
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/3);
+        //strafe right to be by bridge
+        moveRobot(0.5, -0.5, -0.5, 0.5, 800);
+        break;
+        }
+        case 2:{
         //Block detected, move a little bit to the left to account for camera position
         moveRobot(0.5, 0.5, 0.5, 0.5, 200);
         moveRobot(0.5, -0.5, -0.5, 0.5, 2000); //Strafe forward to position for grabbing block
 
         armDown();
         //move right to not hit bridge
-        moveRobot(-0.5, 0.5, 0.5, -0.5, 900);
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2000);
         //go to other side
-        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration);
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration-1500);
         //drop block
         armUp();
         //go back
-        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration/2);
-       
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/4);
+        //strafe right to be by bridge
+        moveRobot(0.5, -0.5, -0.5, 0.5, 800);
+        break;
+        }
+        case 3:{
+        //Block detected, move a little bit to the left to account for camera position
+        moveRobot(0.5, 0.5, 0.5, 0.5, 125);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2000); //Strafe forward to position for grabbing block
+
+        armDown();
+        //move right to not hit bridge
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2000);
+        //go to other side
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration-1500);
+        //drop block
+        armUp();
+        //go back
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/3);
+        //strafe right to be by bridge
+        moveRobot(0.5, -0.5, -0.5, 0.5, 800);
+        break;
+        }
+        default:{
+        //Block detected, move a little bit to the left to account for camera position
+        moveRobot(-0.5, -0.5, -0.5, -0.5, 10);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2000); //Strafe forward to position for grabbing block
+
+        armDown();
+        //move right to not hit bridge
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2000);
+        //go to other side
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration+=2500);
+        //drop block
+        armUp();
+        //go back
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/2);
+        //strafe right to be by bridge
+        moveRobot(0.5, -0.5, -0.5, 0.5, 1400);
+        break;
+        }
+        }
         // Disable Tracking when we are done;
         targetsSkyStone.deactivate();
     }
