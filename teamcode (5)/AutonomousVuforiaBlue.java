@@ -401,7 +401,9 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
                 
             
             }
-
+            if(iterations==0 && targetVisible==true){
+                    break;
+            }
             // Provide feedback as to where the robot is located (if we know).
             if (targetVisible) {
                 // express position (translation) of robot in inches.
@@ -415,9 +417,7 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
                 break;
             }
             else {
-                if(iterations==0){
-                    break;
-                }
+                
                 telemetry.addData("Visible Target", "none");
                 moveRobot(-0.5, -0.5, -0.5, -0.5, 500);
                 detectDuration+=2500;
@@ -428,12 +428,12 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
         switch(iterations){
         case 1:{
         //Block detected, move a little bit to the left to account for camera position
-        moveRobot(-0.5, -0.5, -0.5, -0.5, 0);
-        moveRobot(0.5, -0.5, -0.5, 0.5, 2000); //Strafe forward to position for grabbing block
+        moveRobot(-0.5, -0.5, -0.5, -0.5, 100);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2200); //Strafe forward to position for grabbing block
 
         armDown();
         //move right to not hit bridge
-        moveRobot(-0.5, 0.5, 0.5, -0.5, 2000);
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2200);
         //go to other side
         moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration);
         //drop block
@@ -446,12 +446,12 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
         }
         case 2:{
         //Block detected, move a little bit to the left to account for camera position
-        moveRobot(0.5, 0.5, 0.5, 0.5, 200);
-        moveRobot(0.5, -0.5, -0.5, 0.5, 2000); //Strafe forward to position for grabbing block
+        moveRobot(0.5, 0.5, 0.5, 0.5, 300);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2200); //Strafe forward to position for grabbing block
 
         armDown();
         //move right to not hit bridge
-        moveRobot(-0.5, 0.5, 0.5, -0.5, 2000);
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2200);
         //go to other side
         moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration-1500);
         //drop block
@@ -465,11 +465,11 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
         case 3:{
         //Block detected, move a little bit to the left to account for camera position
         moveRobot(0.5, 0.5, 0.5, 0.5, 125);
-        moveRobot(0.5, -0.5, -0.5, 0.5, 2000); //Strafe forward to position for grabbing block
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2200); //Strafe forward to position for grabbing block
 
         armDown();
         //move right to not hit bridge
-        moveRobot(-0.5, 0.5, 0.5, -0.5, 2000);
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2200);
         //go to other side
         moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration-1500);
         //drop block

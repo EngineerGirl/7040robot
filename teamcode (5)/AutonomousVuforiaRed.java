@@ -88,6 +88,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
 
 public class AutonomousVuforiaRed extends LinearOpMode {
 
+   
     // IMPORTANT: If you are using a USB WebCam, you must select CAMERA_CHOICE = BACK; and PHONE_IS_PORTRAIT = false;
     private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
     private static final boolean PHONE_IS_PORTRAIT = false  ;
@@ -105,7 +106,7 @@ public class AutonomousVuforiaRed extends LinearOpMode {
         bot.rightFront.setPower(-rightF);
         bot.leftBack.setPower(leftB);
         bot.rightBack.setPower(-rightB);
-        grip.setPosition(10000);
+        grip.setPosition(100000);
         sleep(duration);
         stopRobot(1000);
     }
@@ -115,19 +116,19 @@ public class AutonomousVuforiaRed extends LinearOpMode {
         bot.rightFront.setPower(0);
         bot.leftBack.setPower(0);
         bot.rightBack.setPower(0);
-        grip.setPosition(10000);
+        grip.setPosition(100000);
         sleep(duration);
     }
        
     public void armDown(){
         bot.block.setPosition(0.0);
-        grip.setPosition(10000);
+        grip.setPosition(100000);
         sleep(500);        
     }
     
     public void armUp(){
         bot.block.setPosition(INFINITY);
-        grip.setPosition(10000);
+        grip.setPosition(1000000);
         sleep(500);        
     }
     
@@ -378,8 +379,9 @@ public class AutonomousVuforiaRed extends LinearOpMode {
         targetsSkyStone.activate();
         while (!isStopRequested()) {
             if(!targetVisible){
-                moveRobot(0.5, 0.5, 0.5, 0.5, 500);
-                detectDuration+=1500;
+                //moveRobot(-0.5, -0.5, -0.5, -0.5, 500);
+                //detectDuration+=2500;
+                //iterations++;
             }
         
             // check all the trackable targets to see which one (if any) is visible.
@@ -397,8 +399,12 @@ public class AutonomousVuforiaRed extends LinearOpMode {
                     }
                     break;
                 }
+                
+            
             }
-
+            if(iterations==0 && targetVisible==true){
+                    break;
+            }
             // Provide feedback as to where the robot is located (if we know).
             if (targetVisible) {
                 // express position (translation) of robot in inches.
@@ -412,24 +418,88 @@ public class AutonomousVuforiaRed extends LinearOpMode {
                 break;
             }
             else {
+                
                 telemetry.addData("Visible Target", "none");
+                moveRobot(0.5, 0.5, 0.5, 0.5, 500);
+                detectDuration+=2500;
+                iterations++;
             }
             telemetry.update();
         }
-        
+        switch(iterations){
+        case 1:{
         //Block detected, move a little bit to the left to account for camera position
-        moveRobot(0.5, 0.5, 0.5, 0.5, 150);
-        moveRobot(0.5, -0.5, -0.5, 0.5, 1500); //Strafe forward to position for grabbing block
+        moveRobot(-0.5, -0.5, -0.5, -0.5, 100);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2200); //Strafe forward to position for grabbing block
 
         armDown();
-        
-        moveRobot(-0.5, 0.5, 0.5, -0.5, 1000);
-        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration);
-
+        //move right to not hit bridge
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2200);
+        //go to other side
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration);
+        //drop block
         armUp();
+        //go back
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/3);
+        //strafe right to be by bridge
+        moveRobot(0.5, -0.5, -0.5, 0.5, 800);
+        break;
+        }
+        case 2:{
+        //Block detected, move a little bit to the left to account for camera position
+        moveRobot(0.5, 0.5, 0.5, 0.5, 300);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2200); //Strafe forward to position for grabbing block
 
-        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration/3+300);
-       
+        armDown();
+        //move right to not hit bridge
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2200);
+        //go to other side
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration-1500);
+        //drop block
+        armUp();
+        //go back
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/4);
+        //strafe right to be by bridge
+        moveRobot(0.5, -0.5, -0.5, 0.5, 800);
+        break;
+        }
+        case 3:{
+        //Block detected, move a little bit to the left to account for camera position
+        moveRobot(0.5, 0.5, 0.5, 0.5, 125);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2200); //Strafe forward to position for grabbing block
+
+        armDown();
+        //move right to not hit bridge
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2200);
+        //go to other side
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration-1500);
+        //drop block
+        armUp();
+        //go back
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/3);
+        //strafe right to be by bridge
+        moveRobot(0.5, -0.5, -0.5, 0.5, 800);
+        break;
+        }
+        default:{
+        //Block detected, move a little bit to the left to account for camera position
+        moveRobot(-0.5, -0.5, -0.5, -0.5, 10);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2000); //Strafe forward to position for grabbing block
+
+        armDown();
+        //move right to not hit bridge
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2000);
+        //go to other side
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration+=2500);
+        //drop block
+        armUp();
+        //go back
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/2);
+        //strafe right to be by bridge
+        moveRobot(0.5, -0.5, -0.5, 0.5, 1400);
+        break;
+        }
+        }
         // Disable Tracking when we are done;
         targetsSkyStone.deactivate();
     }

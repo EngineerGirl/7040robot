@@ -69,21 +69,22 @@ public class leftParkAway extends LinearOpMode {
     
     //Method to move the robot for a specified duration
     public void moveRobot(double leftF, double rightF, double leftB, double rightB, long duration){
-        bot.leftFront.setPower(-leftF);
-        bot.rightFront.setPower(rightF);
-        bot.leftBack.setPower(-leftB);
-        bot.rightBack.setPower(rightB);
-        bot.grip.setPosition(100000);
+        leftFront.setPower(-leftF);
+        rightFront.setPower(rightF);
+        leftBack.setPower(-leftB);
+        rightBack.setPower(rightB);
+        grip.setPosition(100000);
         sleep(duration);
+        stopRobot(10);
     }
     
     //Method to stop robot
     public void stopRobot(long duration){
-        bot.leftFront.setPower(0);
-        bot.rightFront.setPower(0);
-        bot.leftBack.setPower(0);
-        bot.rightBack.setPower(0);
-        bot.grip.setPosition(1000000);
+        leftFront.setPower(0);
+        rightFront.setPower(0);
+        leftBack.setPower(0);
+        rightBack.setPower(0);
+        grip.setPosition(1000000);
         sleep(duration);        
     } 
     
@@ -97,12 +98,12 @@ public class leftParkAway extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        /*leftFront  = hardwareMap.get(DcMotor.class, "leftFront");
+        leftFront  = hardwareMap.get(DcMotor.class, "leftFront");
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         leftBack  = hardwareMap.get(DcMotor.class, "leftBack");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         foundation = hardwareMap.get(Servo.class, "foundation");
-        grip = hardwareMap.get(Servo.class, "grip");*/
+        grip = hardwareMap.get(Servo.class, "grip");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -114,12 +115,14 @@ public class leftParkAway extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            bot.grip.setPosition(-1.0);
+            //t.grip.setPosition(-1.0);
             
             //add code for parking here
             //sleep duration is in milliseconds
             //ex. moveRobot(0.5, 0.5, 0.5, 0.5, 1000);
-            
+            moveRobot(0.5, 0.5, 0.5, 0.5, 900);
+            moveRobot(0.5, -0.5, -0.5, 0.5, 3000);
+            stopRobot(28400);
             
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
