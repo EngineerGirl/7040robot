@@ -428,7 +428,7 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
         switch(iterations){
         case 1:{
         //Block detected, move a little bit to the left to account for camera position
-        moveRobot(-0.5, -0.5, -0.5, -0.5, 100);
+        moveRobot(0.5, 0.5, 0.5, 0.5, 50);
         moveRobot(0.5, -0.5, -0.5, 0.5, 2200); //Strafe forward to position for grabbing block
 
         armDown();
@@ -446,12 +446,12 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
         }
         case 2:{
         //Block detected, move a little bit to the left to account for camera position
-        moveRobot(0.5, 0.5, 0.5, 0.5, 300);
+        moveRobot(0.5, 0.5, 0.5, 0.5, 200);
         moveRobot(0.5, -0.5, -0.5, 0.5, 2200); //Strafe forward to position for grabbing block
 
         armDown();
         //move right to not hit bridge
-        moveRobot(-0.5, 0.5, 0.5, -0.5, 2200);
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2250);
         //go to other side
         moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration-1500);
         //drop block
@@ -480,9 +480,10 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
         moveRobot(0.5, -0.5, -0.5, 0.5, 800);
         break;
         }
-        default:{
+        case 0:{
         //Block detected, move a little bit to the left to account for camera position
         moveRobot(-0.5, -0.5, -0.5, -0.5, 10);
+        moveRobot(0.5, 0.5, 0.5, 0.5, 300);
         moveRobot(0.5, -0.5, -0.5, 0.5, 2000); //Strafe forward to position for grabbing block
 
         armDown();
@@ -496,6 +497,25 @@ public class AutonomousVuforiaBlue extends LinearOpMode {
         moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/2);
         //strafe right to be by bridge
         moveRobot(0.5, -0.5, -0.5, 0.5, 1400);
+        break;
+        }
+        default:{
+        //Block detected, move a little bit to the left to account for camera position
+        moveRobot(-0.5, -0.5, -0.5, -0.5, 10);
+        moveRobot(0.5, 0.5, 0.5, 0.5, 300);
+        moveRobot(0.5, -0.5, -0.5, 0.5, 2000); //Strafe forward to position for grabbing block
+
+        armDown();
+        //move right to not hit bridge
+        moveRobot(-0.5, 0.5, 0.5, -0.5, 2000);
+        //go to other side
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration+=2500);
+        //drop block
+        armUp();
+        //go back
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/2);
+        //strafe right to be by bridge
+        moveRobot(0.5, -0.5, -0.5, 0.5, 1400);    
         break;
         }
         }

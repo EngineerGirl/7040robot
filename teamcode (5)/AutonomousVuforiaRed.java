@@ -429,18 +429,18 @@ public class AutonomousVuforiaRed extends LinearOpMode {
         switch(iterations){
         case 1:{
         //Block detected, move a little bit to the left to account for camera position
-        moveRobot(-0.5, -0.5, -0.5, -0.5, 100);
+        moveRobot(-0.5, -0.5, -0.5, -0.5, 0);
         moveRobot(0.5, -0.5, -0.5, 0.5, 2200); //Strafe forward to position for grabbing block
 
         armDown();
         //move right to not hit bridge
         moveRobot(-0.5, 0.5, 0.5, -0.5, 2200);
         //go to other side
-        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration);
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration);
         //drop block
         armUp();
         //go back
-        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/3);
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration/3);
         //strafe right to be by bridge
         moveRobot(0.5, -0.5, -0.5, 0.5, 800);
         break;
@@ -454,11 +454,11 @@ public class AutonomousVuforiaRed extends LinearOpMode {
         //move right to not hit bridge
         moveRobot(-0.5, 0.5, 0.5, -0.5, 2200);
         //go to other side
-        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration-1500);
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration-1500);
         //drop block
         armUp();
         //go back
-        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/4);
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration/4);
         //strafe right to be by bridge
         moveRobot(0.5, -0.5, -0.5, 0.5, 800);
         break;
@@ -472,11 +472,11 @@ public class AutonomousVuforiaRed extends LinearOpMode {
         //move right to not hit bridge
         moveRobot(-0.5, 0.5, 0.5, -0.5, 2200);
         //go to other side
-        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration-1500);
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration-1500);
         //drop block
         armUp();
         //go back
-        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/3);
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration/3);
         //strafe right to be by bridge
         moveRobot(0.5, -0.5, -0.5, 0.5, 800);
         break;
@@ -490,11 +490,11 @@ public class AutonomousVuforiaRed extends LinearOpMode {
         //move right to not hit bridge
         moveRobot(-0.5, 0.5, 0.5, -0.5, 2000);
         //go to other side
-        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration+=2500);
+        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration+=2500);
         //drop block
         armUp();
         //go back
-        moveRobot(-0.5, -0.5, -0.5, -0.5, detectDuration/2);
+        moveRobot(0.5, 0.5, 0.5, 0.5, detectDuration/2);
         //strafe right to be by bridge
         moveRobot(0.5, -0.5, -0.5, 0.5, 1400);
         break;
